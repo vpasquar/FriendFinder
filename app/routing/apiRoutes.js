@@ -12,15 +12,29 @@ module.exports = function(app) {
     app.post('/api/friends', function(req, res) {
         // Our user is the data sent in the request.
         var thisUser = req.body;
-        var diffList = [];
         console.log(thisUser);
+        var tempScores = [];
+        // workaround for arrays not working in request ( i know this is stupid)
+        tempScores.push(thisUser.score1);
+        tempScores.push(thisUser.score2);
+        tempScores.push(thisUser.score3);
+        tempScores.push(thisUser.score4);
+        tempScores.push(thisUser.score5);
+        tempScores.push(thisUser.score6);
+        tempScores.push(thisUser.score7);
+        tempScores.push(thisUser.score8);
+        tempScores.push(thisUser.score9);
+        tempScores.push(thisUser.score10);
+        var diffList = [];
+        console.log(tempScores);
+   
         if (friendData.length > 1) {
         	for (var i=0; i < friendData.length;i++) {
         		var difference = 0;
                 console.log(thisUser);
-        		for (var x = 0; x < thisUser.scores.length; x++) {
+        		for (var x = 0; x < tempScores.length; x++) {
         			var fileAns = friendData[i].answers[x];
-        			var userAns = thisUser.scores[x];
+        			var userAns = tempScores[x];
         			var diff    = fileAns - userAns
         			difference += Math.abs(diff);
         		}
